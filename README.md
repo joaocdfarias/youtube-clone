@@ -11,7 +11,7 @@ Clone do YouTube feito para estudos de React e Material UI, somente página inic
 <li><a href="#prerequisitos">Tecnologias Usadas</a></li>
 </ul>
 
-<h2 id="preview">Preview:</h2>
+<h2 id="preview">Preview</h2>
 <img height="500" src="https://i.imgur.com/GEcT2Qh.gif" />
 
 <h2 id="tecnologias">Tecnologias Usadas</h2>
