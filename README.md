@@ -29,5 +29,5 @@ Clone do YouTube feito para estudos de React e Material UI, somente página inic
 
 <h2 id="prerequisitos">Pré-requisitos</h2>
 <p> Você vai precisar baixar o Node.js e Git para começar a utilizar o projeto</p>
-<p> Ao abrir a raiz do projeto, no seu terminal digite <code>npm install</code> para instalar as dependências do projeto. </p>
+<p> Ao abrir a raiz do projeto, digite no seu terminal <code>npm install</code> para instalar as dependências do projeto. </p>
 
