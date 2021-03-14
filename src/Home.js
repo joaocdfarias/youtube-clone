@@ -11,6 +11,8 @@ import {
   ListItemIcon,
   ListItemText,
   Drawer,
+  Typography,
+  Box,
 } from "@material-ui/core";
 
 import MenuIcon from "@material-ui/icons/Menu";
@@ -21,6 +23,8 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import HomeIcon from "@material-ui/icons/Home";
 import WhatshotIcon from "@material-ui/icons/Whatshot";
 import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
+import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
+import HistoryIcon from "@material-ui/icons/History";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -115,14 +119,20 @@ function Home() {
               <ListItemIcon>
                 <HomeIcon className={classes.listIcon}></HomeIcon>
               </ListItemIcon>
-              <ListItemText primary={"Início"} />
+              <ListItemText
+                classes={{ primary: classes.listItemText }}
+                primary={"Início"}
+              />
             </ListItem>
 
             <ListItem button classes={{ root: classes.listItem }}>
               <ListItemIcon>
                 <WhatshotIcon className={classes.listIcon}></WhatshotIcon>
               </ListItemIcon>
-              <ListItemText primary={"Em alta"} />
+              <ListItemText
+                classes={{ primary: classes.listItemText }}
+                primary={"Em alta"}
+              />
             </ListItem>
 
             <ListItem button classes={{ root: classes.listItem }}>
@@ -131,13 +141,55 @@ function Home() {
                   className={classes.listIcon}
                 ></SubscriptionsIcon>
               </ListItemIcon>
-              <ListItemText primary={"Inscrições"} />
+              <ListItemText
+                classes={{ primary: classes.listItemText }}
+                primary={"Inscrições"}
+              />
             </ListItem>
           </List>
           <Divider />
+          <List>
+            <ListItem button classes={{ root: classes.listItem }}>
+              <ListItemIcon>
+                <VideoLibraryIcon
+                  className={classes.listIcon}
+                ></VideoLibraryIcon>
+              </ListItemIcon>
+              <ListItemText
+                classes={{ primary: classes.listItemText }}
+                primary={"Biblioteca"}
+              />
+            </ListItem>
+
+            <ListItem button classes={{ root: classes.listItem }}>
+              <ListItemIcon>
+                <HistoryIcon className={classes.listIcon}></HistoryIcon>
+              </ListItemIcon>
+              <ListItemText
+                classes={{ primary: classes.listItemText }}
+                primary={"Histórico"}
+              />
+            </ListItem>
+          </List>
+          <Divider />
+          <Box p={2}>
+            <Typography>
+              Faça login para curtir vídeos, comentar e se inscrever.
+            </Typography>
+            <Button
+              variant="outlined"
+              color="secondary"
+              startIcon={<AccountCircleIcon />}
+            >
+              Fazer Login
+            </Button>
+          </Box>
         </div>
       </Drawer>
     </div>
+
+    //VideoLibraryIcon
+    //HistoryIcon
   );
 }
 
