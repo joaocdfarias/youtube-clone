@@ -14,6 +14,10 @@ import {
   Typography,
   Box,
   ListSubheader,
+  Grid,
+  Hidden,
+  useTheme,
+  Switch,
 } from "@material-ui/core";
 
 import MenuIcon from "@material-ui/icons/Menu";
@@ -39,6 +43,7 @@ import LoopIcon from "@material-ui/icons/Loop";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
+    backgroundColor: theme.palette.background.dark,
   },
   appBar: {
     boxShadow: "none",
@@ -87,10 +92,81 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "uppercase",
     fontSize: 14,
   },
+  typoSize: {
+    fontSize: 14,
+  },
 }));
 
-function Home() {
+const videos = [
+  {
+    id: 1,
+    title: "A GALÁXIA MAIS PRÓXIMA DA NOSSA VIA-LÁCTEA",
+    channel: "João Carlos",
+    views: "11 mi de visualizações",
+    date: "há 1 semana",
+    thumb: "/images/thumb1.jpg",
+  },
+  {
+    id: 2,
+    title: "ESTE LUGAR TEM O PÔR-DO-SOL MAIS BONITO DO MUNDO!",
+    channel: "João Carlos",
+    views: "957 mil visualizações",
+    date: "há 1 semana",
+    thumb: "/images/thumb2.jpg",
+  },
+  {
+    id: 3,
+    title: "A FLORESTA QUE INSPIROU O JOGO SLENDERMAN",
+    channel: "João Carlos",
+    views: "106 mil visualizações",
+    date: "há 1 semana",
+    thumb: "/images/thumb3.jpg",
+  },
+  {
+    id: 4,
+    title: "ANIMAIS FANTÁSTICOS AVISTADOS E GRAVADOS",
+    channel: "João Carlos",
+    views: "5,6 mi de visualizações",
+    date: "há 1 semana",
+    thumb: "/images/thumb4.jpg",
+  },
+  {
+    id: 5,
+    title: "COMO É A VISTA DENTRO DE UM BURACO NEGRO?",
+    channel: "João Carlos",
+    views: "2,2 mi de visualizações",
+    date: "há 1 semana",
+    thumb: "/images/thumb5.jpg",
+  },
+  {
+    id: 6,
+    title: "O DESERTO QUE FOI GRAVADO A SÉRIE O MANDALORIANO",
+    channel: "João Carlos",
+    views: "233 mil visualizações",
+    date: "há 1 semana",
+    thumb: "/images/thumb6.jpg",
+  },
+  {
+    id: 7,
+    title: "VEJA O PLANETA DESCONHECIDO ATÉ PELA NASA!",
+    channel: "João Carlos",
+    views: "118 mil visualizações",
+    date: "há 1 semana",
+    thumb: "/images/thumb7.jpg",
+  },
+  {
+    id: 8,
+    title: "VEJA O CARRO MAIS RÁPIDO DO MUNDO EM AÇÃO!",
+    channel: "João Carlos",
+    views: "1,9 mi de visualizações",
+    date: "há 1 semana",
+    thumb: "/images/thumb8.jpg",
+  },
+];
+
+function Home({ darkMode, setDarkMode }) {
   const classes = useStyles();
+  const theme = useTheme();
 
   return (
     <div className={classes.root}>
@@ -99,24 +175,32 @@ function Home() {
           <IconButton
             edge="start"
             className={classes.menuIcon}
-            color="inherit"
             aria-label="menu"
           >
             <MenuIcon />
           </IconButton>
           <img
-            src="/images/preto.png"
+            src={
+              theme.palette.type === "dark"
+                ? "/images/branco.png"
+                : "/images/preto.png"
+            }
             alt="YouTube Logo (Dark Mode)"
             className={classes.logo}
           ></img>
           <div className={classes.grow} />
-          <IconButton className={classes.icons} color="inherit">
+          <Switch
+            value={darkMode}
+            onChange={() => setDarkMode(!darkMode)}
+            className={classes.icons}
+          />
+          <IconButton className={classes.icons}>
             <VideoCallIcon />
           </IconButton>
-          <IconButton className={classes.icons} color="inherit">
+          <IconButton className={classes.icons}>
             <AppsIcon />
           </IconButton>
-          <IconButton className={classes.icons} color="inherit">
+          <IconButton className={classes.icons}>
             <MoreVertIcon />
           </IconButton>
           <Button
@@ -128,195 +212,249 @@ function Home() {
           </Button>
         </Toolbar>
       </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <Toolbar />
-        <div className={classes.drawerContainer}>
-          <List>
-            <ListItem button classes={{ root: classes.listItem }}>
-              <ListItemIcon>
-                <HomeIcon className={classes.listIcon}></HomeIcon>
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary={"Início"}
-              />
-            </ListItem>
-
-            <ListItem button classes={{ root: classes.listItem }}>
-              <ListItemIcon>
-                <WhatshotIcon className={classes.listIcon}></WhatshotIcon>
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary={"Em alta"}
-              />
-            </ListItem>
-
-            <ListItem button classes={{ root: classes.listItem }}>
-              <ListItemIcon>
-                <SubscriptionsIcon
-                  className={classes.listIcon}
-                ></SubscriptionsIcon>
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary={"Inscrições"}
-              />
-            </ListItem>
-          </List>
-          <Divider />
-          <List>
-            <ListItem button classes={{ root: classes.listItem }}>
-              <ListItemIcon>
-                <VideoLibraryIcon
-                  className={classes.listIcon}
-                ></VideoLibraryIcon>
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary={"Biblioteca"}
-              />
-            </ListItem>
-
-            <ListItem button classes={{ root: classes.listItem }}>
-              <ListItemIcon>
-                <HistoryIcon className={classes.listIcon}></HistoryIcon>
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary={"Histórico"}
-              />
-            </ListItem>
-          </List>
-          <Divider />
-          <Box className={classes.boxSpacing}>
-            <Typography className={classes.typoSpacing} variant="body2">
-              Faça login para curtir vídeos, comentar e se inscrever.
-            </Typography>
-            <Button
-              variant="outlined"
-              color="secondary"
-              startIcon={<AccountCircleIcon />}
-            >
-              Fazer Login
-            </Button>
-          </Box>
-          <Divider />
-          <List
-            subheader={
-              <ListSubheader className={classes.subHeader}>
-                O melhor do YouTube
-              </ListSubheader>
-            }
+      <Box display="flex">
+        <Hidden mdDown>
+          <Drawer
+            className={classes.drawer}
+            variant="permanent"
+            classes={{
+              paper: classes.drawerPaper,
+            }}
           >
-            <ListItem button classes={{ root: classes.listItem }}>
-              <ListItemIcon>
-                <PlayCircleFilledIcon
-                  className={classes.listIcon}
-                ></PlayCircleFilledIcon>
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary={"Música"}
-              />
-            </ListItem>
+            <Toolbar />
+            <div className={classes.drawerContainer}>
+              <List>
+                <ListItem button classes={{ root: classes.listItem }}>
+                  <ListItemIcon>
+                    <HomeIcon className={classes.listIcon}></HomeIcon>
+                  </ListItemIcon>
+                  <ListItemText
+                    classes={{ primary: classes.listItemText }}
+                    primary={"Início"}
+                  />
+                </ListItem>
 
-            <ListItem button classes={{ root: classes.listItem }}>
-              <ListItemIcon>
-                <SportsSoccerIcon
-                  className={classes.listIcon}
-                ></SportsSoccerIcon>
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary={"Esportes"}
-              />
-            </ListItem>
+                <ListItem button classes={{ root: classes.listItem }}>
+                  <ListItemIcon>
+                    <WhatshotIcon className={classes.listIcon}></WhatshotIcon>
+                  </ListItemIcon>
+                  <ListItemText
+                    classes={{ primary: classes.listItemText }}
+                    primary={"Em alta"}
+                  />
+                </ListItem>
 
-            <ListItem button classes={{ root: classes.listItem }}>
-              <ListItemIcon>
-                <SportsEsportsIcon
-                  className={classes.listIcon}
-                ></SportsEsportsIcon>
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary={"Jogos"}
-              />
-            </ListItem>
+                <ListItem button classes={{ root: classes.listItem }}>
+                  <ListItemIcon>
+                    <SubscriptionsIcon
+                      className={classes.listIcon}
+                    ></SubscriptionsIcon>
+                  </ListItemIcon>
+                  <ListItemText
+                    classes={{ primary: classes.listItemText }}
+                    primary={"Inscrições"}
+                  />
+                </ListItem>
+              </List>
+              <Divider />
+              <List>
+                <ListItem button classes={{ root: classes.listItem }}>
+                  <ListItemIcon>
+                    <VideoLibraryIcon
+                      className={classes.listIcon}
+                    ></VideoLibraryIcon>
+                  </ListItemIcon>
+                  <ListItemText
+                    classes={{ primary: classes.listItemText }}
+                    primary={"Biblioteca"}
+                  />
+                </ListItem>
 
-            <ListItem button classes={{ root: classes.listItem }}>
-              <ListItemIcon>
-                <TheatersIcon className={classes.listIcon}></TheatersIcon>
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary={"Filmes"}
-              />
-            </ListItem>
+                <ListItem button classes={{ root: classes.listItem }}>
+                  <ListItemIcon>
+                    <HistoryIcon className={classes.listIcon}></HistoryIcon>
+                  </ListItemIcon>
+                  <ListItemText
+                    classes={{ primary: classes.listItemText }}
+                    primary={"Histórico"}
+                  />
+                </ListItem>
+              </List>
+              <Divider />
+              <Box className={classes.boxSpacing}>
+                <Typography className={classes.typoSpacing} variant="body2">
+                  Faça login para curtir vídeos, comentar e se inscrever.
+                </Typography>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  startIcon={<AccountCircleIcon />}
+                >
+                  Fazer Login
+                </Button>
+              </Box>
+              <Divider />
+              <List
+                subheader={
+                  <ListSubheader className={classes.subHeader}>
+                    O melhor do YouTube
+                  </ListSubheader>
+                }
+              >
+                <ListItem button classes={{ root: classes.listItem }}>
+                  <ListItemIcon>
+                    <PlayCircleFilledIcon
+                      className={classes.listIcon}
+                    ></PlayCircleFilledIcon>
+                  </ListItemIcon>
+                  <ListItemText
+                    classes={{ primary: classes.listItemText }}
+                    primary={"Música"}
+                  />
+                </ListItem>
 
-            <ListItem button classes={{ root: classes.listItem }}>
-              <ListItemIcon>
-                <AnnouncementIcon
-                  className={classes.listIcon}
-                ></AnnouncementIcon>
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary={"Notícias"}
-              />
-            </ListItem>
+                <ListItem button classes={{ root: classes.listItem }}>
+                  <ListItemIcon>
+                    <SportsSoccerIcon
+                      className={classes.listIcon}
+                    ></SportsSoccerIcon>
+                  </ListItemIcon>
+                  <ListItemText
+                    classes={{ primary: classes.listItemText }}
+                    primary={"Esportes"}
+                  />
+                </ListItem>
 
-            <ListItem button classes={{ root: classes.listItem }}>
-              <ListItemIcon>
-                <LiveTvIcon className={classes.listIcon}></LiveTvIcon>
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary={"Ao vivo"}
-              />
-            </ListItem>
+                <ListItem button classes={{ root: classes.listItem }}>
+                  <ListItemIcon>
+                    <SportsEsportsIcon
+                      className={classes.listIcon}
+                    ></SportsEsportsIcon>
+                  </ListItemIcon>
+                  <ListItemText
+                    classes={{ primary: classes.listItemText }}
+                    primary={"Jogos"}
+                  />
+                </ListItem>
 
-            <ListItem button classes={{ root: classes.listItem }}>
-              <ListItemIcon>
-                <EmojiObjectsIcon
-                  className={classes.listIcon}
-                ></EmojiObjectsIcon>
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary={"Aprender"}
-              />
-            </ListItem>
+                <ListItem button classes={{ root: classes.listItem }}>
+                  <ListItemIcon>
+                    <TheatersIcon className={classes.listIcon}></TheatersIcon>
+                  </ListItemIcon>
+                  <ListItemText
+                    classes={{ primary: classes.listItemText }}
+                    primary={"Filmes"}
+                  />
+                </ListItem>
 
-            <ListItem button classes={{ root: classes.listItem }}>
-              <ListItemIcon>
-                <YouTubeIcon className={classes.listIcon}></YouTubeIcon>
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary={"Vídeos do momento"}
-              />
-            </ListItem>
+                <ListItem button classes={{ root: classes.listItem }}>
+                  <ListItemIcon>
+                    <AnnouncementIcon
+                      className={classes.listIcon}
+                    ></AnnouncementIcon>
+                  </ListItemIcon>
+                  <ListItemText
+                    classes={{ primary: classes.listItemText }}
+                    primary={"Notícias"}
+                  />
+                </ListItem>
 
-            <ListItem button classes={{ root: classes.listItem }}>
-              <ListItemIcon>
-                <LoopIcon className={classes.listIcon}></LoopIcon>
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary={"Vídeos em 360°"}
-              />
-            </ListItem>
-          </List>
-        </div>
-      </Drawer>
+                <ListItem button classes={{ root: classes.listItem }}>
+                  <ListItemIcon>
+                    <LiveTvIcon className={classes.listIcon}></LiveTvIcon>
+                  </ListItemIcon>
+                  <ListItemText
+                    classes={{ primary: classes.listItemText }}
+                    primary={"Ao vivo"}
+                  />
+                </ListItem>
+
+                <ListItem button classes={{ root: classes.listItem }}>
+                  <ListItemIcon>
+                    <EmojiObjectsIcon
+                      className={classes.listIcon}
+                    ></EmojiObjectsIcon>
+                  </ListItemIcon>
+                  <ListItemText
+                    classes={{ primary: classes.listItemText }}
+                    primary={"Aprender"}
+                  />
+                </ListItem>
+
+                <ListItem button classes={{ root: classes.listItem }}>
+                  <ListItemIcon>
+                    <YouTubeIcon className={classes.listIcon}></YouTubeIcon>
+                  </ListItemIcon>
+                  <ListItemText
+                    classes={{ primary: classes.listItemText }}
+                    primary={"Vídeos do momento"}
+                  />
+                </ListItem>
+
+                <ListItem button classes={{ root: classes.listItem }}>
+                  <ListItemIcon>
+                    <LoopIcon className={classes.listIcon}></LoopIcon>
+                  </ListItemIcon>
+                  <ListItemText
+                    classes={{ primary: classes.listItemText }}
+                    primary={"Vídeos em 360°"}
+                  />
+                </ListItem>
+              </List>
+            </div>
+          </Drawer>
+        </Hidden>
+
+        <Box p={4}>
+          <Toolbar />
+          <Typography
+            variant="h5"
+            color="textPrimary"
+            style={{ fontWeight: 600 }}
+          >
+            Recomendados
+          </Typography>
+
+          <Grid container spacing={2}>
+            {videos.map((video, index) => (
+              <Grid item lg={3} md={4} sm={6} xs={12}>
+                <Box>
+                  <img
+                    style={{ width: "100%" }}
+                    src={video.thumb}
+                    alt={video.title}
+                  />
+                </Box>
+
+                <Typography
+                  className={classes.typoSize}
+                  style={{ fontWeight: 600 }}
+                  gutterBottom
+                  variant="body1"
+                  color="textPrimary"
+                >
+                  {" "}
+                  {video.title}{" "}
+                </Typography>
+
+                <Typography
+                  display="block"
+                  variant="body2"
+                  color="textSecondary"
+                >
+                  {" "}
+                  {video.channel}{" "}
+                </Typography>
+
+                <Typography variant="body2" color="textSecondary">
+                  {" "}
+                  {`${video.views} • ${video.date}`}{" "}
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      </Box>
     </div>
 
     //VideoLibraryIcon
